@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
+import { MapPreview } from "@/components/map/MapPreview";
+import { FeaturedArtwork } from "@/components/home/FeaturedArtwork";
+import { FeaturedArtist } from "@/components/home/FeaturedArtist";
 
 const quickActions = [
   { label: "Today", description: "What's happening now" },
@@ -119,6 +122,49 @@ export default function Index() {
               </Card>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Map Preview & Featured Content */}
+      <section className="container pb-12">
+        <div className="grid gap-6 lg:grid-cols-3">
+          {/* Map Preview - Takes up 2 columns */}
+          <div className="lg:col-span-2">
+            <MapPreview />
+          </div>
+          
+          {/* Featured Artwork */}
+          <div className="space-y-6">
+            <FeaturedArtwork />
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Artist Row */}
+      <section className="container pb-12">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <FeaturedArtist />
+          
+          {/* Stats or quick info cards */}
+          <Card className="border-border/50 bg-gradient-to-br from-primary/5 to-sky-light/30">
+            <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+              <div className="mb-3 text-4xl font-bold text-primary">14</div>
+              <p className="text-sm text-muted-foreground">Upcoming Events</p>
+              <Button asChild variant="link" className="mt-2 text-primary">
+                <Link to="/calendar">View Calendar</Link>
+              </Button>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-border/50 bg-gradient-to-br from-sky-light/30 to-primary/5">
+            <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+              <div className="mb-3 text-4xl font-bold text-primary">8</div>
+              <p className="text-sm text-muted-foreground">Cultural Venues</p>
+              <Button asChild variant="link" className="mt-2 text-primary">
+                <Link to="/venues">Explore Venues</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
