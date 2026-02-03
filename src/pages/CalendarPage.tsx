@@ -1,12 +1,28 @@
-import { Calendar, Filter, List, Grid3X3, MapPin, Clock, DollarSign } from "lucide-react";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Calendar, List, Grid3X3, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
+import { EventFilters, EventFilterState, defaultEventFilters } from "@/components/filters/EventFilters";
+import { useEventFilters } from "@/hooks/useEventFilters";
 
 export default function CalendarPage() {
+  const [searchParams] = useSearchParams();
+  
+  // Initialize filters from URL params
+  const initialFilters: EventFilterState = {
+    ...defaultEventFilters,
+    dateRange: (searchParams.get("range") as EventFilterState["dateRange"]) || "all",
+    freeOnly: searchParams.get("free") === "true",
+    costTypes: searchParams.get("free") === "true" ? ["free"] : [],
+  };
+  
+  const [filters, setFilters] = useState<EventFilterState>(initialFilters);
+
   const { data: events, isLoading } = useQuery({
     queryKey: ["all-events"],
     queryFn: async () => {
@@ -22,6 +38,8 @@ export default function CalendarPage() {
       return data;
     },
   });
+
+  const filteredEvents = useEventFilters(events, filters);
 
   const formatCostType = (costType: string, price?: number) => {
     switch (costType) {
@@ -52,13 +70,15 @@ export default function CalendarPage() {
               <h1 className="text-3xl font-bold tracking-tight">Calendar</h1>
               <p className="text-muted-foreground">
                 Browse upcoming events in Jackson's arts scene
+                {filteredEvents.length !== events?.length && events?.length && (
+                  <span className="ml-2 text-primary">
+                    ({filteredEvents.length} of {events.length} events)
+                  </span>
+                )}
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="border-primary/20 hover:border-primary hover:bg-primary hover:text-primary-foreground">
-                <Filter className="mr-2 h-4 w-4" />
-                Filter
-              </Button>
+              <EventFilters filters={filters} onFiltersChange={setFilters} />
               <div className="flex rounded-md border border-primary/20">
                 <Button variant="ghost" size="sm" className="rounded-r-none text-primary">
                   <List className="h-4 w-4" />
@@ -85,9 +105,9 @@ export default function CalendarPage() {
               </Card>
             ))}
           </div>
-        ) : events && events.length > 0 ? (
+        ) : filteredEvents.length > 0 ? (
           <div className="space-y-4">
-            {events.map((event) => {
+            {filteredEvents.map((event) => {
               const cost = formatCostType(event.cost_type || "free", event.ticket_price);
               return (
                 <Card 
@@ -159,6 +179,23 @@ export default function CalendarPage() {
               );
             })}
           </div>
+        ) : events && events.length > 0 ? (
+          <Card>
+            <CardContent className="flex flex-col items-center justify-center py-24 text-center">
+              <Calendar className="mb-4 h-16 w-16 text-primary/30" />
+              <h2 className="mb-2 text-xl font-semibold">No Matching Events</h2>
+              <p className="max-w-md text-muted-foreground">
+                No events match your current filters. Try adjusting your criteria.
+              </p>
+              <Button 
+                variant="outline" 
+                className="mt-4"
+                onClick={() => setFilters(defaultEventFilters)}
+              >
+                Clear Filters
+              </Button>
+            </CardContent>
+          </Card>
         ) : (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-24 text-center">
