@@ -9,10 +9,10 @@ export function Layout({ children }: LayoutProps) {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">{children}</main>
-      <footer className="border-t bg-muted/30 py-8">
+      <footer className="border-t border-primary/10 bg-gradient-to-b from-sky-light/20 to-background py-8">
         <div className="container text-center">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Hub for the Arts · Jackson, TN
+          <p className="text-sm text-foreground">
+            © {new Date().getFullYear()} Hub for the Arts · <span className="text-primary">Jackson, TN</span>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             Digital civic infrastructure for the arts
