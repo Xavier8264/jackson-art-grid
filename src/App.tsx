@@ -9,7 +9,9 @@ import CalendarPage from "./pages/CalendarPage";
 import MapPage from "./pages/MapPage";
 import GalleryPage from "./pages/GalleryPage";
 import ArtistsPage from "./pages/ArtistsPage";
+import ArtistDetailPage from "./pages/ArtistDetailPage";
 import VenuesPage from "./pages/VenuesPage";
+import VenueDetailPage from "./pages/VenueDetailPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,7 +29,9 @@ const App = () => (
             <Route path="/map" element={<MapPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/artists" element={<ArtistsPage />} />
+            <Route path="/artists/:id" element={<ArtistDetailPage />} />
             <Route path="/venues" element={<VenuesPage />} />
+            <Route path="/venues/:id" element={<VenueDetailPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
