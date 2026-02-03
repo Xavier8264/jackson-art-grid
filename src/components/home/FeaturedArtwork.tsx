@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { getArtworkPlaceholder } from "@/lib/placeholder-images";
 
 export function FeaturedArtwork() {
   const { data: artwork, isLoading } = useQuery({
@@ -51,11 +52,13 @@ export function FeaturedArtwork() {
           </div>
         ) : artwork ? (
           <div className="group">
-            {/* Artwork image placeholder */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-br from-sky-light/50 to-primary/10">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Palette className="h-16 w-16 text-primary/20" />
-              </div>
+            {/* Artwork image */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+              <img 
+                src={artwork.image_url || getArtworkPlaceholder(artwork.id)} 
+                alt={artwork.title}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
               <Badge className="absolute right-2 top-2 bg-green-500 text-white">
                 For Sale
               </Badge>

@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import { MapPreview } from "@/components/map/MapPreview";
 import { FeaturedArtwork } from "@/components/home/FeaturedArtwork";
 import { FeaturedArtist } from "@/components/home/FeaturedArtist";
+import { heroImage } from "@/lib/placeholder-images";
 
 const quickActions = [
   { label: "Today", description: "What's happening now", path: "/calendar?range=today" },
@@ -73,8 +74,16 @@ export default function Index() {
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b bg-gradient-to-br from-sky-light/50 via-background to-primary/5 py-16 md:py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--sky)/0.15),transparent_50%)]" />
+      <section className="relative overflow-hidden border-b py-16 md:py-24">
+        {/* Hero background image */}
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Arts festival in Jackson" 
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
+        </div>
         <div className="container relative text-center">
           <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             Hub for the Arts

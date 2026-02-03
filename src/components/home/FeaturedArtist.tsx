@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { getArtistPlaceholder } from "@/lib/placeholder-images";
 
 export function FeaturedArtist() {
   const { data: artist, isLoading } = useQuery({
@@ -60,8 +61,12 @@ export function FeaturedArtist() {
         ) : artist ? (
           <div className="group">
             {/* Avatar */}
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-sky-light text-primary">
-              <Users className="h-10 w-10" />
+            <div className="h-20 w-20 overflow-hidden rounded-full">
+              <img 
+                src={artist.image_url || getArtistPlaceholder(artist.id)} 
+                alt={artist.name}
+                className="h-full w-full object-cover"
+              />
             </div>
             
             <h3 className="mt-3 font-semibold transition-colors group-hover:text-primary">
