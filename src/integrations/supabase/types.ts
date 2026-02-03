@@ -14,7 +14,265 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      artists: {
+        Row: {
+          art_forms: Database["public"]["Enums"]["art_type"][] | null
+          available_for_commission: boolean | null
+          bio: string | null
+          created_at: string
+          email: string | null
+          facebook: string | null
+          id: string
+          image_url: string | null
+          instagram: string | null
+          name: string
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          art_forms?: Database["public"]["Enums"]["art_type"][] | null
+          available_for_commission?: boolean | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          facebook?: string | null
+          id?: string
+          image_url?: string | null
+          instagram?: string | null
+          name: string
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          art_forms?: Database["public"]["Enums"]["art_type"][] | null
+          available_for_commission?: boolean | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          facebook?: string | null
+          id?: string
+          image_url?: string | null
+          instagram?: string | null
+          name?: string
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      artworks: {
+        Row: {
+          artist_id: string
+          created_at: string
+          description: string | null
+          dimensions: string | null
+          for_sale: boolean | null
+          id: string
+          image_url: string | null
+          medium: string | null
+          price: number | null
+          title: string
+          updated_at: string
+          year_created: number | null
+        }
+        Insert: {
+          artist_id: string
+          created_at?: string
+          description?: string | null
+          dimensions?: string | null
+          for_sale?: boolean | null
+          id?: string
+          image_url?: string | null
+          medium?: string | null
+          price?: number | null
+          title: string
+          updated_at?: string
+          year_created?: number | null
+        }
+        Update: {
+          artist_id?: string
+          created_at?: string
+          description?: string | null
+          dimensions?: string | null
+          for_sale?: boolean | null
+          id?: string
+          image_url?: string | null
+          medium?: string | null
+          price?: number | null
+          title?: string
+          updated_at?: string
+          year_created?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "artworks_artist_id_fkey"
+            columns: ["artist_id"]
+            isOneToOne: false
+            referencedRelation: "artists"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      event_artists: {
+        Row: {
+          artist_id: string
+          event_id: string
+          id: string
+          role: string | null
+        }
+        Insert: {
+          artist_id: string
+          event_id: string
+          id?: string
+          role?: string | null
+        }
+        Update: {
+          artist_id?: string
+          event_id?: string
+          id?: string
+          role?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_artists_artist_id_fkey"
+            columns: ["artist_id"]
+            isOneToOne: false
+            referencedRelation: "artists"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_artists_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          accessibility_notes: string | null
+          art_type: Database["public"]["Enums"]["art_type"] | null
+          cost_type: Database["public"]["Enums"]["cost_type"] | null
+          created_at: string
+          description: string | null
+          end_time: string | null
+          event_date: string
+          id: string
+          image_url: string | null
+          is_recurring: boolean | null
+          recurrence_pattern: string | null
+          start_time: string | null
+          ticket_price: number | null
+          ticket_url: string | null
+          title: string
+          updated_at: string
+          venue_id: string | null
+        }
+        Insert: {
+          accessibility_notes?: string | null
+          art_type?: Database["public"]["Enums"]["art_type"] | null
+          cost_type?: Database["public"]["Enums"]["cost_type"] | null
+          created_at?: string
+          description?: string | null
+          end_time?: string | null
+          event_date: string
+          id?: string
+          image_url?: string | null
+          is_recurring?: boolean | null
+          recurrence_pattern?: string | null
+          start_time?: string | null
+          ticket_price?: number | null
+          ticket_url?: string | null
+          title: string
+          updated_at?: string
+          venue_id?: string | null
+        }
+        Update: {
+          accessibility_notes?: string | null
+          art_type?: Database["public"]["Enums"]["art_type"] | null
+          cost_type?: Database["public"]["Enums"]["cost_type"] | null
+          created_at?: string
+          description?: string | null
+          end_time?: string | null
+          event_date?: string
+          id?: string
+          image_url?: string | null
+          is_recurring?: boolean | null
+          recurrence_pattern?: string | null
+          start_time?: string | null
+          ticket_price?: number | null
+          ticket_url?: string | null
+          title?: string
+          updated_at?: string
+          venue_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_venue_id_fkey"
+            columns: ["venue_id"]
+            isOneToOne: false
+            referencedRelation: "venues"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      venues: {
+        Row: {
+          accessibility_info: string | null
+          address: string
+          art_types: Database["public"]["Enums"]["art_type"][] | null
+          city: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          latitude: number | null
+          longitude: number | null
+          name: string
+          phone: string | null
+          state: string
+          updated_at: string
+          website: string | null
+          zip: string | null
+        }
+        Insert: {
+          accessibility_info?: string | null
+          address: string
+          art_types?: Database["public"]["Enums"]["art_type"][] | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          name: string
+          phone?: string | null
+          state?: string
+          updated_at?: string
+          website?: string | null
+          zip?: string | null
+        }
+        Update: {
+          accessibility_info?: string | null
+          address?: string
+          art_types?: Database["public"]["Enums"]["art_type"][] | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string
+          phone?: string | null
+          state?: string
+          updated_at?: string
+          website?: string | null
+          zip?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +281,16 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      art_type:
+        | "visual_arts"
+        | "music"
+        | "theater"
+        | "dance"
+        | "literary"
+        | "film"
+        | "crafts"
+        | "mixed_media"
+      cost_type: "free" | "pay_at_door" | "ticketed" | "donation"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +417,18 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      art_type: [
+        "visual_arts",
+        "music",
+        "theater",
+        "dance",
+        "literary",
+        "film",
+        "crafts",
+        "mixed_media",
+      ],
+      cost_type: ["free", "pay_at_door", "ticketed", "donation"],
+    },
   },
 } as const
