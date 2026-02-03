@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { getArtworkPlaceholder } from "@/lib/placeholder-images";
 
 export default function GalleryPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -166,11 +167,13 @@ export default function GalleryPage() {
                 key={artwork.id} 
                 className="group overflow-hidden border-border/50 transition-all hover:border-primary/30 hover:shadow-lg"
               >
-                {/* Image placeholder */}
-                <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-sky-light/50 to-primary/10">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Palette className="h-16 w-16 text-primary/20" />
-                  </div>
+                {/* Image */}
+                <div className="relative aspect-square overflow-hidden">
+                  <img 
+                    src={artwork.image_url || getArtworkPlaceholder(artwork.id)} 
+                    alt={artwork.title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
                   {artwork.for_sale && (
                     <Badge className="absolute right-2 top-2 bg-green-500 text-white">
                       For Sale

@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
+import { getArtistPlaceholder, getArtworkPlaceholder } from "@/lib/placeholder-images";
 
 const artTypeLabels: Record<string, string> = {
   visual_arts: "Visual Arts",
@@ -125,8 +126,12 @@ export default function ArtistDetailPage() {
 
           <div className="flex flex-col gap-6 md:flex-row md:items-start">
             {/* Avatar */}
-            <div className="flex h-32 w-32 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-sky-light text-primary">
-              <Users className="h-16 w-16" />
+            <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-full">
+              <img 
+                src={artist.image_url || getArtistPlaceholder(artist.id)} 
+                alt={artist.name}
+                className="h-full w-full object-cover"
+              />
             </div>
 
             <div className="flex-1">
@@ -260,9 +265,13 @@ export default function ArtistDetailPage() {
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {artworks.map((artwork) => (
-                    <Card key={artwork.id} className="border-border/50 hover:border-primary/30 transition-colors">
-                      <div className="aspect-video bg-gradient-to-br from-sky-light/50 to-primary/10 flex items-center justify-center">
-                        <Palette className="h-10 w-10 text-primary/20" />
+                    <Card key={artwork.id} className="border-border/50 hover:border-primary/30 transition-colors overflow-hidden">
+                      <div className="aspect-video overflow-hidden">
+                        <img 
+                          src={artwork.image_url || getArtworkPlaceholder(artwork.id)} 
+                          alt={artwork.title}
+                          className="h-full w-full object-cover"
+                        />
                       </div>
                       <CardContent className="p-4">
                         <h3 className="font-medium">{artwork.title}</h3>
