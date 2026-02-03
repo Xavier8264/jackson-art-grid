@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Building2, Search, MapPin, Phone, Globe, Accessibility } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -159,21 +160,21 @@ export default function VenuesPage() {
         ) : filteredVenues.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2">
             {filteredVenues.map((venue) => (
-              <Card 
-                key={venue.id} 
-                className="group overflow-hidden border-border/50 transition-all hover:border-primary/30 hover:shadow-lg"
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    {/* Icon */}
-                    <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-sky-light text-primary">
-                      <Building2 className="h-7 w-7" />
-                    </div>
-                    
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold transition-colors group-hover:text-primary">
-                        {venue.name}
-                      </h3>
+              <Link key={venue.id} to={`/venues/${venue.id}`}>
+                <Card 
+                  className="group h-full overflow-hidden border-border/50 transition-all hover:border-primary/30 hover:shadow-lg"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      {/* Icon */}
+                      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-sky-light text-primary">
+                        <Building2 className="h-7 w-7" />
+                      </div>
+                      
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold transition-colors group-hover:text-primary">
+                          {venue.name}
+                        </h3>
                       <p className="mt-1 flex items-center text-sm text-muted-foreground">
                         <MapPin className="mr-1 h-3 w-3" />
                         {venue.address}, {venue.city}, {venue.state} {venue.zip}
@@ -231,6 +232,7 @@ export default function VenuesPage() {
                   </div>
                 </CardContent>
               </Card>
+              </Link>
             ))}
           </div>
         ) : hasActiveFilters ? (

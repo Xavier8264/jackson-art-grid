@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Users, Search, Palette, Mail, Globe, Instagram } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -158,19 +159,19 @@ export default function ArtistsPage() {
         ) : filteredArtists.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredArtists.map((artist) => (
-              <Card 
-                key={artist.id} 
-                className="group overflow-hidden border-border/50 transition-all hover:border-primary/30 hover:shadow-lg"
-              >
-                <CardContent className="p-6">
-                  {/* Avatar placeholder */}
-                  <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-sky-light text-primary">
-                    <Users className="h-10 w-10" />
-                  </div>
-                  
-                  <h3 className="text-lg font-semibold transition-colors group-hover:text-primary">
-                    {artist.name}
-                  </h3>
+              <Link key={artist.id} to={`/artists/${artist.id}`}>
+                <Card 
+                  className="group h-full overflow-hidden border-border/50 transition-all hover:border-primary/30 hover:shadow-lg"
+                >
+                  <CardContent className="p-6">
+                    {/* Avatar placeholder */}
+                    <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-sky-light text-primary">
+                      <Users className="h-10 w-10" />
+                    </div>
+                    
+                    <h3 className="text-lg font-semibold transition-colors group-hover:text-primary">
+                      {artist.name}
+                    </h3>
                   
                   {artist.bio && (
                     <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">
@@ -226,6 +227,7 @@ export default function ArtistsPage() {
                   </div>
                 </CardContent>
               </Card>
+              </Link>
             ))}
           </div>
         ) : hasActiveFilters ? (
