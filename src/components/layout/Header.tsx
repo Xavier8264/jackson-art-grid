@@ -2,8 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Search, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { GlobalSearch } from "@/components/search/GlobalSearch";
 
 const navLinks = [
   { label: "Calendar", path: "/calendar" },
@@ -51,24 +51,21 @@ export function Header() {
 
         {/* Search & Mobile Menu */}
         <div className="flex items-center gap-2">
-          {/* Search */}
+          {/* Desktop Search */}
           <div className={cn(
-            "transition-all duration-200",
-            searchOpen ? "w-64" : "w-10"
+            "hidden transition-all duration-200 md:block",
+            searchOpen ? "w-80" : "w-10"
           )}>
             {searchOpen ? (
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search events, artists, venues..."
-                  className="pl-9 pr-9"
-                  autoFocus
-                  onBlur={() => setSearchOpen(false)}
+                <GlobalSearch 
+                  className="w-full" 
+                  onResultClick={() => setSearchOpen(false)} 
                 />
                 <button
                   onClick={() => setSearchOpen(false)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground z-10"
+                  style={{ right: '2.5rem' }}
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -84,6 +81,17 @@ export function Header() {
               </Button>
             )}
           </div>
+
+          {/* Mobile Search Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setSearchOpen(!searchOpen)}
+            aria-label="Toggle search"
+          >
+            <Search className="h-5 w-5" />
+          </Button>
 
           {/* Mobile Menu Toggle */}
           <Button
@@ -101,6 +109,16 @@ export function Header() {
           </Button>
         </div>
       </div>
+
+      {/* Mobile Search - Full Width */}
+      {searchOpen && (
+        <div className="border-t bg-background px-4 py-3 md:hidden">
+          <GlobalSearch 
+            className="w-full" 
+            onResultClick={() => setSearchOpen(false)} 
+          />
+        </div>
+      )}
 
       {/* Tagline - Desktop */}
       <div className="hidden border-t bg-muted/30 py-1 text-center text-xs text-muted-foreground md:block">
