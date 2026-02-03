@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import { Users, Search, Palette, Mail, Globe, Instagram } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,8 +6,31 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Constants } from "@/integrations/supabase/types";
+
+const artTypeLabels: Record<string, string> = {
+  visual_arts: "Visual Arts",
+  music: "Music",
+  theater: "Theater",
+  dance: "Dance",
+  literary: "Literary",
+  film: "Film",
+  crafts: "Crafts",
+  mixed_media: "Mixed Media",
+};
 
 export default function ArtistsPage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [artFormFilter, setArtFormFilter] = useState<string>("all");
+  const [commissionFilter, setCommissionFilter] = useState<string>("all");
+
   const { data: artists, isLoading } = useQuery({
     queryKey: ["artists"],
     queryFn: async () => {
@@ -20,8 +44,41 @@ export default function ArtistsPage() {
     },
   });
 
+  const filteredArtists = useMemo(() => {
+    if (!artists) return [];
+
+    return artists.filter((artist) => {
+      // Search filter
+      const matchesSearch =
+        searchQuery === "" ||
+        artist.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        artist.bio?.toLowerCase().includes(searchQuery.toLowerCase());
+
+      // Art form filter
+      const matchesArtForm =
+        artFormFilter === "all" ||
+        (artist.art_forms && artist.art_forms.includes(artFormFilter as any));
+
+      // Commission filter
+      const matchesCommission =
+        commissionFilter === "all" ||
+        (commissionFilter === "available" && artist.available_for_commission) ||
+        (commissionFilter === "not-available" && !artist.available_for_commission);
+
+      return matchesSearch && matchesArtForm && matchesCommission;
+    });
+  }, [artists, searchQuery, artFormFilter, commissionFilter]);
+
+  const clearFilters = () => {
+    setSearchQuery("");
+    setArtFormFilter("all");
+    setCommissionFilter("all");
+  };
+
+  const hasActiveFilters = searchQuery || artFormFilter !== "all" || commissionFilter !== "all";
+
   const formatArtForm = (artForm: string) => {
-    return artForm.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    return artTypeLabels[artForm] || artForm.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   };
 
   return (
@@ -34,11 +91,51 @@ export default function ArtistsPage() {
               <h1 className="text-3xl font-bold tracking-tight">Artists</h1>
               <p className="text-muted-foreground">
                 Meet Jackson's creative community
+                {hasActiveFilters && artists && (
+                  <span className="ml-2 text-primary">
+                    ({filteredArtists.length} of {artists.length})
+                  </span>
+                )}
               </p>
             </div>
-            <div className="relative max-w-sm">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input placeholder="Search artists..." className="pl-9 border-primary/20 focus:border-primary" />
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Search artists..."
+                  className="w-48 pl-9 border-primary/20 focus:border-primary"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <Select value={artFormFilter} onValueChange={setArtFormFilter}>
+                <SelectTrigger className="w-36 border-primary/20">
+                  <SelectValue placeholder="Art Form" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Art Forms</SelectItem>
+                  {Constants.public.Enums.art_type.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {artTypeLabels[type] || type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select value={commissionFilter} onValueChange={setCommissionFilter}>
+                <SelectTrigger className="w-40 border-primary/20">
+                  <SelectValue placeholder="Commission" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Artists</SelectItem>
+                  <SelectItem value="available">Available</SelectItem>
+                  <SelectItem value="not-available">Not Available</SelectItem>
+                </SelectContent>
+              </Select>
+              {hasActiveFilters && (
+                <Button variant="ghost" size="sm" onClick={clearFilters} className="text-muted-foreground">
+                  Clear
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -58,9 +155,9 @@ export default function ArtistsPage() {
               </Card>
             ))}
           </div>
-        ) : artists && artists.length > 0 ? (
+        ) : filteredArtists.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {artists.map((artist) => (
+            {filteredArtists.map((artist) => (
               <Card 
                 key={artist.id} 
                 className="group overflow-hidden border-border/50 transition-all hover:border-primary/30 hover:shadow-lg"
@@ -131,6 +228,19 @@ export default function ArtistsPage() {
               </Card>
             ))}
           </div>
+        ) : hasActiveFilters ? (
+          <Card>
+            <CardContent className="flex flex-col items-center justify-center py-24 text-center">
+              <Users className="mb-4 h-16 w-16 text-primary/30" />
+              <h2 className="mb-2 text-xl font-semibold">No Matching Artists</h2>
+              <p className="max-w-md text-muted-foreground">
+                No artists match your search criteria. Try adjusting your filters.
+              </p>
+              <Button variant="outline" className="mt-4" onClick={clearFilters}>
+                Clear Filters
+              </Button>
+            </CardContent>
+          </Card>
         ) : (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-24 text-center">

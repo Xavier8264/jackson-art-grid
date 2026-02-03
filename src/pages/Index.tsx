@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Calendar, MapPin, Image, Users, Building2, ArrowRight, Clock, DollarSign } from "lucide-react";
+import { Calendar, MapPin, Image, Users, Building2, ArrowRight, Clock, DollarSign, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,10 +11,10 @@ import { FeaturedArtwork } from "@/components/home/FeaturedArtwork";
 import { FeaturedArtist } from "@/components/home/FeaturedArtist";
 
 const quickActions = [
-  { label: "Today", description: "What's happening now" },
-  { label: "This Weekend", description: "Plan your weekend" },
-  { label: "Free Events", description: "No cost activities" },
-  { label: "Near Me", description: "Events nearby" },
+  { label: "Today", description: "What's happening now", path: "/calendar?range=today" },
+  { label: "This Weekend", description: "Plan your weekend", path: "/calendar?range=thisWeekend" },
+  { label: "Free Events", description: "No cost activities", path: "/calendar?free=true" },
+  { label: "Near Me", description: "Events nearby", path: "/map", icon: Navigation },
 ];
 
 const sections = [
@@ -91,9 +91,12 @@ export default function Index() {
                 key={action.label}
                 variant="outline"
                 className="h-auto flex-col gap-0.5 border-primary/20 px-6 py-3 hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                asChild
               >
-                <span className="font-medium">{action.label}</span>
-                <span className="text-xs opacity-70">{action.description}</span>
+                <Link to={action.path}>
+                  <span className="font-medium">{action.label}</span>
+                  <span className="text-xs opacity-70">{action.description}</span>
+                </Link>
               </Button>
             ))}
           </div>
