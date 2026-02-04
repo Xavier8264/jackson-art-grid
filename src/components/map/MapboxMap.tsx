@@ -105,7 +105,7 @@ export function MapboxMap({
         el.style.transform = "scale(1)";
       });
 
-      const marker = new mapboxgl.Marker({ element: el })
+      const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
         .setLngLat([venue.longitude, venue.latitude])
         .addTo(map.current!);
 
