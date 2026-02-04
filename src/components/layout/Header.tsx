@@ -121,8 +121,10 @@ export function Header() {
       )}
 
       {/* Tagline - Desktop */}
-      <div className="hidden border-t bg-muted/30 py-1 text-center text-xs text-muted-foreground md:block">
-        Designed for Jackson. Built for the E+ Broadband Fiber Optic Network.
+      <div className="hidden border-t bg-muted/30 py-1 text-xs text-muted-foreground md:block">
+        <div className="container text-center">
+          Designed for Jackson. Built for the E+ Broadband Fiber Optic Network.
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -145,8 +147,10 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <div className="border-t bg-muted/30 py-2 text-center text-xs text-muted-foreground">
-            Designed for Jackson. Built for the E+ Broadband Fiber Optic Network.
+          <div className="border-t bg-muted/30 py-2 text-xs text-muted-foreground">
+            <div className="container text-center">
+              Designed for Jackson. Built for the E+ Broadband Fiber Optic Network.
+            </div>
           </div>
         </div>
       )}
