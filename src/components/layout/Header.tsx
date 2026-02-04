@@ -21,9 +21,9 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between gap-4">
+      <div className="container flex h-16 items-center gap-4">
         {/* Logo & Branding */}
-        <Link to="/" className="flex flex-col items-start">
+        <Link to="/" className="flex flex-col items-start flex-shrink-0">
           <span className="text-xl font-semibold tracking-tight text-foreground">
             Hub for the Arts
           </span>
@@ -32,8 +32,8 @@ export function Header() {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-1 md:flex">
+        {/* Desktop Navigation - Centered */}
+        <nav className="hidden items-center gap-1 md:flex flex-1 justify-center">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -50,8 +50,8 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Search & Mobile Menu */}
-        <div className="flex items-center gap-2">
+        {/* Search & Mobile Menu - Right Aligned with padding to match left */}
+        <div className="flex items-center gap-2 flex-shrink-0">
           {/* Desktop Search */}
           <div className={cn(
             "hidden transition-all duration-200 md:block",
