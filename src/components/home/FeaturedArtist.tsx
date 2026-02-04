@@ -5,9 +5,22 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { getArtistPlaceholder } from "@/lib/placeholder-images";
+import { getArtistPlaceholder, getPortraitImage } from "@/lib/placeholder-images";
 
 export function FeaturedArtist() {
+  const { data: allArtists } = useQuery({
+    queryKey: ["all-artists-list"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("artists")
+        .select("*")
+        .order("name", { ascending: true });
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
   const { data: artist, isLoading } = useQuery({
     queryKey: ["featured-artist"],
     queryFn: async () => {
@@ -33,6 +46,8 @@ export function FeaturedArtist() {
     },
     staleTime: 1000 * 60 * 5, // Rotate every 5 minutes
   });
+
+  const artistIndex = artist && allArtists ? allArtists.findIndex(a => a.id === artist.id) : 0;
 
   const formatArtForm = (artForm: string) => {
     return artForm.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -63,7 +78,7 @@ export function FeaturedArtist() {
             {/* Avatar */}
             <div className="h-20 w-20 overflow-hidden rounded-full">
               <img 
-                src={artist.image_url || getArtistPlaceholder(artist.id)} 
+                src={getPortraitImage(artistIndex)} 
                 alt={artist.name}
                 className="h-full w-full object-cover"
               />

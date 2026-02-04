@@ -15,7 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Constants } from "@/integrations/supabase/types";
-import { getArtistPlaceholder } from "@/lib/placeholder-images";
+import { getArtistPlaceholder, getPortraitImage } from "@/lib/placeholder-images";
 
 const artTypeLabels: Record<string, string> = {
   visual_arts: "Visual Arts",
@@ -159,7 +159,7 @@ export default function ArtistsPage() {
           </div>
         ) : filteredArtists.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredArtists.map((artist) => (
+            {filteredArtists.map((artist, index) => (
               <Link key={artist.id} to={`/artists/${artist.id}`}>
                 <Card 
                   className="group h-full overflow-hidden border-border/50 transition-all hover:border-primary/30 hover:shadow-lg"
@@ -168,7 +168,7 @@ export default function ArtistsPage() {
                     {/* Avatar */}
                     <div className="mb-4 h-20 w-20 overflow-hidden rounded-full">
                       <img 
-                        src={artist.image_url || getArtistPlaceholder(artist.id)} 
+                        src={getPortraitImage(index)} 
                         alt={artist.name}
                         className="h-full w-full object-cover"
                       />

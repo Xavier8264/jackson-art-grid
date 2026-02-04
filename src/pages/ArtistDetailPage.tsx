@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
-import { getArtistPlaceholder, getArtworkPlaceholder } from "@/lib/placeholder-images";
+import { getArtistPlaceholder, getArtworkPlaceholder, getPortraitImage } from "@/lib/placeholder-images";
 
 const artTypeLabels: Record<string, string> = {
   visual_arts: "Visual Arts",
@@ -37,6 +37,21 @@ export default function ArtistDetailPage() {
     },
     enabled: !!id,
   });
+
+  const { data: allArtists } = useQuery({
+    queryKey: ["all-artists"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("artists")
+        .select("*")
+        .order("name", { ascending: true });
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const artistIndex = allArtists?.findIndex(a => a.id === id) ?? 0;
 
   const { data: artworks } = useQuery({
     queryKey: ["artist-artworks", id],
@@ -128,7 +143,7 @@ export default function ArtistDetailPage() {
             {/* Avatar */}
             <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-full">
               <img 
-                src={artist.image_url || getArtistPlaceholder(artist.id)} 
+                src={getPortraitImage(artistIndex)} 
                 alt={artist.name}
                 className="h-full w-full object-cover"
               />
