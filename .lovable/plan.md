@@ -113,7 +113,7 @@ Events entered once will automatically appear:
 
 ---
 
-## Database Structure (Lovable Cloud)
+## Database Structure (Supabase)
 
 We'll set up a backend to store:
 - **Events**: title, date, time, description, cost, art type, accessibility
