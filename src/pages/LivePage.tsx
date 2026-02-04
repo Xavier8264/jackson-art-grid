@@ -17,7 +17,6 @@ export default function LivePage() {
           *,
           venue:venues(name, address)
         `)
-        .eq("is_live", true)
         .order("event_date", { ascending: true });
       
       if (error) throw error;
