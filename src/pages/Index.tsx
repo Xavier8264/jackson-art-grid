@@ -102,7 +102,7 @@ export default function Index() {
         </div>
 
         {/* Quick Actions */}
-        <div className="flex justify-center mb-12 w-full">
+        <div className="relative w-full flex justify-center mb-12 px-4">
           <div className="flex flex-wrap justify-center items-center gap-3">
             {quickActions.map((action) => (
               <Button
@@ -112,8 +112,8 @@ export default function Index() {
                 asChild
               >
                 <Link to={action.path}>
-                  <span className="font-medium flex items-center gap-1.5">
-                    {action.label === "Live" && <span className="animate-pulse text-primary">·</span>}
+                  <span className="font-medium flex items-center gap-1">
+                    {action.label === "Live" && <span className="inline-block animate-pulse text-primary text-base">·</span>}
                     {action.label}
                   </span>
                   <span className="text-xs opacity-70">{action.description}</span>
