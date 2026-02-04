@@ -110,7 +110,10 @@ export default function Index() {
                 asChild
               >
                 <Link to={action.path}>
-                  <span className="font-medium">{action.label}</span>
+                  <span className="font-medium flex items-center gap-1.5">
+                    {action.label === "Live" && <span className="animate-pulse text-primary">·</span>}
+                    {action.label}
+                  </span>
                   <span className="text-xs opacity-70">{action.description}</span>
                 </Link>
               </Button>
