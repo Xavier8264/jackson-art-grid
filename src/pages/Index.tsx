@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Calendar, MapPin, Image, Users, Building2, ArrowRight, Clock, DollarSign, Navigation } from "lucide-react";
+import { Calendar, MapPin, Image, Users, Building2, ArrowRight, Clock, DollarSign, Navigation, Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +16,7 @@ const quickActions = [
   { label: "This Weekend", description: "Plan your weekend", path: "/calendar?range=thisWeekend" },
   { label: "Free Events", description: "No cost activities", path: "/calendar?free=true" },
   { label: "Near Me", description: "Events nearby", path: "/map", icon: Navigation },
+  { label: "Live", description: "8K livestreams now", path: "/live", icon: Radio },
 ];
 
 const sections = [
@@ -48,6 +49,12 @@ const sections = [
     description: "Find cultural spaces",
     icon: Building2,
     path: "/venues",
+  },
+  {
+    title: "Live",
+    description: "8K livestreamed performances",
+    icon: Radio,
+    path: "/live",
   },
 ];
 
