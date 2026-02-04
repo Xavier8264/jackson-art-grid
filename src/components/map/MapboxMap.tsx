@@ -79,12 +79,21 @@ export function MapboxMap({
     venues.forEach((venue) => {
       if (!venue.latitude || !venue.longitude) return;
 
-      // Create custom marker element
+      // Create custom marker element with inner container for transforms
       const el = document.createElement("div");
-      el.className = "venue-marker";
       el.style.cssText = `
         width: 32px;
         height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `;
+
+      const innerMarker = document.createElement("div");
+      innerMarker.className = "venue-marker";
+      innerMarker.style.cssText = `
+        width: 100%;
+        height: 100%;
         background: linear-gradient(135deg, hsl(200, 80%, 55%), hsl(200, 80%, 45%));
         border: 3px solid white;
         border-radius: 50%;
@@ -96,13 +105,15 @@ export function MapboxMap({
         transition: transform 0.2s;
         transform-origin: center;
       `;
-      el.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`;
+      innerMarker.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`;
+
+      el.appendChild(innerMarker);
 
       el.addEventListener("mouseenter", () => {
-        el.style.transform = "scale(1.15)";
+        innerMarker.style.transform = "scale(1.15)";
       });
       el.addEventListener("mouseleave", () => {
-        el.style.transform = "scale(1)";
+        innerMarker.style.transform = "scale(1)";
       });
 
       const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
