@@ -101,7 +101,7 @@ export default function Index() {
           <p className="mb-8 text-sm font-medium text-primary">Jackson, TN</p>
 
           {/* Quick Actions */}
-          <div className="mx-auto mb-12 flex w-full max-w-3xl flex-wrap justify-center gap-3">
+          <div className="mx-auto mb-12 flex w-full max-w-3xl flex-wrap justify-center items-center gap-3">
             {quickActions.map((action) => (
               <Button
                 key={action.label}
