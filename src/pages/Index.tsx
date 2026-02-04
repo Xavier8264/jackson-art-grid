@@ -101,23 +101,25 @@ export default function Index() {
           <p className="mb-8 text-sm font-medium text-primary">Jackson, TN</p>
 
           {/* Quick Actions */}
-          <div className="mx-auto mb-12 flex w-full max-w-3xl flex-wrap justify-center items-center gap-3">
-            {quickActions.map((action) => (
-              <Button
-                key={action.label}
-                variant="outline"
-                className="h-auto flex-col gap-0.5 border-primary/20 px-6 py-3 hover:border-primary hover:bg-primary hover:text-primary-foreground"
-                asChild
-              >
-                <Link to={action.path}>
-                  <span className="font-medium flex items-center gap-1.5">
-                    {action.label === "Live" && <span className="animate-pulse text-primary">·</span>}
-                    {action.label}
-                  </span>
-                  <span className="text-xs opacity-70">{action.description}</span>
-                </Link>
-              </Button>
-            ))}
+          <div className="flex justify-center mx-auto mb-12">
+            <div className="flex w-full max-w-3xl flex-wrap justify-center items-center gap-3">
+              {quickActions.map((action) => (
+                <Button
+                  key={action.label}
+                  variant="outline"
+                  className="h-auto flex-col gap-0.5 border-primary/20 px-6 py-3 hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                  asChild
+                >
+                  <Link to={action.path}>
+                    <span className="font-medium flex items-center gap-1.5">
+                      {action.label === "Live" && <span className="animate-pulse text-primary">·</span>}
+                      {action.label}
+                    </span>
+                    <span className="text-xs opacity-70">{action.description}</span>
+                  </Link>
+                </Button>
+              ))}
+            </div>
           </div>
         </div>
       </section>

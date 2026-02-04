@@ -11,7 +11,7 @@ const navLinks = [
   { label: "Gallery", path: "/gallery" },
   { label: "Artists", path: "/artists" },
   { label: "Venues", path: "/venues" },
-  { label: "·Live", path: "/live" },
+  { label: "Live", path: "/live" },
 ];
 
 export function Header() {
