@@ -92,11 +92,11 @@ export default function Index() {
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
         </div>
         <div className="container relative text-center">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             Hub for the Arts
           </h1>
-          <p className="mx-auto mb-2 max-w-2xl text-lg text-muted-foreground md:text-xl">
-            Discover what's happening in Jackson's arts scene
+          <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-foreground md:text-xl font-medium">
+            Hub for the Arts is a centralized digital platform that connects artists, venues, and the public to make arts discovery and access simple, inclusive, and accessible citywide in Jackson, Tennessee.
           </p>
           <p className="mb-8 text-sm font-medium text-primary">Jackson, TN</p>
         </div>
