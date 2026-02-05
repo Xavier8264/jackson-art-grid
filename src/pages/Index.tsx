@@ -96,7 +96,7 @@ export default function Index() {
             Hub for the Arts
           </h1>
           <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-foreground md:text-xl font-medium">
-            A centralized digital platform that connects artists, venues, and the public to make arts discovery and access simple, inclusive, and accessible citywide.
+            Expanding Access to the Arts Through Technology in Jackson, TN
           </p>
           <p className="mb-6 text-sm font-medium text-primary">Jackson, TN</p>
 
