@@ -96,7 +96,7 @@ export default function Index() {
             Hub for the Arts
           </h1>
           <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-foreground md:text-xl font-medium">
-            Expanding Access to the Arts Through Technology in Jackson, TN
+            Discover events, venues, and artists that make Jackson, TN a vibrant cultural destination.
           </p>
           <p className="mb-6 text-sm font-medium text-primary">Jackson, TN</p>
 
