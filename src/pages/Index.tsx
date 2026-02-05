@@ -104,7 +104,7 @@ export default function Index() {
           <div className="flex flex-wrap justify-center items-center gap-3 max-w-fit mx-auto">
             {quickActions.map((action) => (
               <Link key={action.label} to={action.path}>
-                <Card className="group h-auto border border-primary/20 bg-gradient-to-br from-primary/5 via-sky-light/10 to-primary/5 transition-all hover:border-primary/50 hover:shadow-md hover:bg-gradient-to-br hover:from-primary/10 hover:via-sky-light/20 hover:to-primary/10">
+                <Card className="group w-40 border border-primary/20 bg-gradient-to-br from-primary/5 via-sky-light/10 to-primary/5 transition-all hover:border-primary/50 hover:shadow-md hover:bg-gradient-to-br hover:from-primary/10 hover:via-sky-light/20 hover:to-primary/10">
                   <CardContent className="flex flex-col gap-1 p-4 text-center">
                     <span className="font-semibold text-foreground text-sm flex items-center justify-center gap-1 group-hover:text-primary transition-colors">
                       {action.label === "Live" && (
