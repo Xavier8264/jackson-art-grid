@@ -58,17 +58,26 @@ export default function GalleryPage() {
       if (priceFilter !== "all" && artwork.price) {
         const price = artwork.price;
         switch (priceFilter) {
-          case "under-100":
-            matchesPrice = price < 100;
+          case "under-50":
+            matchesPrice = price < 50;
             break;
-          case "100-500":
-            matchesPrice = price >= 100 && price <= 500;
+          case "50-100":
+            matchesPrice = price >= 50 && price < 100;
+            break;
+          case "100-250":
+            matchesPrice = price >= 100 && price < 250;
+            break;
+          case "250-500":
+            matchesPrice = price >= 250 && price < 500;
             break;
           case "500-1000":
-            matchesPrice = price > 500 && price <= 1000;
+            matchesPrice = price >= 500 && price < 1000;
             break;
-          case "over-1000":
-            matchesPrice = price > 1000;
+          case "1000-2500":
+            matchesPrice = price >= 1000 && price < 2500;
+            break;
+          case "over-2500":
+            matchesPrice = price >= 2500;
             break;
         }
       } else if (priceFilter !== "all" && !artwork.price) {
@@ -130,10 +139,13 @@ export default function GalleryPage() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">Any Price</SelectItem>
-                  <SelectItem value="under-100">Under $100</SelectItem>
-                  <SelectItem value="100-500">$100 - $500</SelectItem>
-                  <SelectItem value="500-1000">$500 - $1,000</SelectItem>
-                  <SelectItem value="over-1000">Over $1,000</SelectItem>
+                  <SelectItem value="under-50">Under $50</SelectItem>
+                  <SelectItem value="50-100">$50 - $99</SelectItem>
+                  <SelectItem value="100-250">$100 - $249</SelectItem>
+                  <SelectItem value="250-500">$250 - $499</SelectItem>
+                  <SelectItem value="500-1000">$500 - $999</SelectItem>
+                  <SelectItem value="1000-2500">$1,000 - $2,499</SelectItem>
+                  <SelectItem value="over-2500">$2,500+</SelectItem>
                 </SelectContent>
               </Select>
               {hasActiveFilters && (
