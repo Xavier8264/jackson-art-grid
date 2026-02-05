@@ -102,8 +102,8 @@ export default function Index() {
         </div>
 
         {/* Quick Actions */}
-        <div className="relative w-full flex justify-center mb-12 px-4">
-          <div className="flex flex-wrap justify-center items-center gap-3">
+        <div className="w-full flex justify-center mb-12 px-4">
+          <div className="flex flex-wrap justify-center items-center gap-3 max-w-fit">
             {quickActions.map((action) => (
               <Button
                 key={action.label}
