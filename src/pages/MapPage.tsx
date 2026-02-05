@@ -122,8 +122,10 @@ export default function MapPage() {
             <Card className="border-primary/20 shadow-lg">
               <CardContent className="p-4">
                 <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-lg font-semibold">{selectedVenue.name}</h3>
+                  <div className="flex-1">
+                    <Link to={`/venues/${selectedVenue.id}`} className="hover:underline">
+                      <h3 className="text-lg font-semibold text-primary cursor-pointer hover:underline">{selectedVenue.name}</h3>
+                    </Link>
                     <p className="text-sm text-muted-foreground">
                       {selectedVenue.address}, {selectedVenue.city}, {selectedVenue.state}
                     </p>
@@ -131,7 +133,7 @@ export default function MapPage() {
                   <Button 
                     size="icon" 
                     variant="ghost" 
-                    className="h-8 w-8"
+                    className="h-8 w-8 ml-2"
                     onClick={() => setSelectedVenue(null)}
                   >
                     <X className="h-4 w-4" />
