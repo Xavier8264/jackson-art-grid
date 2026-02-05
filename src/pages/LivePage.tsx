@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Radio, MapPin, Clock, Zap, Wifi } from "lucide-react";
+import { Radio, MapPin, Clock, Zap, Wifi, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -139,6 +139,12 @@ export default function LivePage() {
                       )}
                       
                       <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                        {event.event_date && (
+                          <span className="flex items-center">
+                            <Calendar className="mr-1 h-4 w-4 text-primary/60" />
+                            {format(new Date(event.event_date), "MMM d, yyyy")}
+                          </span>
+                        )}
                         {event.start_time && (
                           <span className="flex items-center">
                             <Clock className="mr-1 h-4 w-4 text-primary/60" />
