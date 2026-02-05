@@ -21,7 +21,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center gap-4">
+      <div className="container flex h-16 items-center gap-4 relative">
         {/* Logo & Branding */}
         <Link to="/" className="flex flex-col items-start flex-shrink-0">
           <span className="text-xl font-semibold tracking-tight text-foreground">
@@ -32,8 +32,8 @@ export function Header() {
           </span>
         </Link>
 
-        {/* Desktop Navigation - Centered */}
-        <nav className="hidden items-center gap-1 md:flex flex-1 justify-center">
+        {/* Desktop Navigation - Centered absolutely relative to page */}
+        <nav className="hidden items-center gap-1 md:flex absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => (
             <Link
               key={link.path}

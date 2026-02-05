@@ -105,14 +105,10 @@ export default function Index() {
         <div className="w-full flex justify-center mb-12 px-4">
           <div className="flex flex-wrap justify-center items-center gap-3 max-w-fit">
             {quickActions.map((action) => (
-              <Button
-                key={action.label}
-                variant="outline"
-                className="h-auto flex-col gap-0.5 border border-primary/30 rounded-lg bg-sky-light/20 px-6 py-4 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
-                asChild
-              >
-                <Link to={action.path}>
-                  <span className="font-medium flex items-center gap-1">
+              <Link key={action.label} to={action.path}>
+                <Card className="group h-auto border-primary/20 bg-gradient-to-br from-primary/5 via-sky-light/10 to-primary/5 transition-all hover:border-primary/50 hover:shadow-md hover:bg-gradient-to-br hover:from-primary/10 hover:via-sky-light/20 hover:to-primary/10">
+                  <CardContent className="flex flex-col gap-1 p-5">
+                    <span className="font-semibold text-foreground text-sm flex items-center gap-1 group-hover:text-primary transition-colors">
                       {action.label === "Live" && (
                         <span
                           className="inline-block animate-pulse text-[1.25em]"
@@ -123,10 +119,11 @@ export default function Index() {
                         </span>
                       )}
                       {action.label}
-                  </span>
-                  <span className="text-xs opacity-70">{action.description}</span>
-                </Link>
-              </Button>
+                    </span>
+                    <span className="text-xs text-muted-foreground">{action.description}</span>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
