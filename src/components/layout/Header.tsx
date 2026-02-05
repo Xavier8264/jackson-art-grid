@@ -50,8 +50,8 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Search & Mobile Menu - Right Aligned with padding to match left */}
-        <div className="flex items-center gap-2 flex-shrink-0">
+        {/* Search & Mobile Menu - Right Aligned */}
+        <div className="flex items-center gap-2 flex-shrink-0 ml-auto">
           {/* Desktop Search */}
           <div className={cn(
             "hidden transition-all duration-200 md:block",

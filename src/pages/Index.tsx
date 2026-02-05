@@ -81,7 +81,7 @@ export default function Index() {
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b py-16 md:py-24">
+      <section className="relative overflow-hidden border-b py-12 md:py-20">
         {/* Hero background image */}
         <div className="absolute inset-0">
           <img 
@@ -98,17 +98,15 @@ export default function Index() {
           <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-foreground md:text-xl font-medium">
             A centralized digital platform that connects artists, venues, and the public to make arts discovery and access simple, inclusive, and accessible citywide.
           </p>
-          <p className="mb-8 text-sm font-medium text-primary">Jackson, TN</p>
-        </div>
+          <p className="mb-6 text-sm font-medium text-primary">Jackson, TN</p>
 
-        {/* Quick Actions */}
-        <div className="w-full flex justify-center mb-12 px-4">
-          <div className="flex flex-wrap justify-center items-center gap-3 max-w-fit">
+          {/* Quick Actions - Positioned over the photo */}
+          <div className="flex flex-wrap justify-center items-center gap-3 max-w-fit mx-auto">
             {quickActions.map((action) => (
               <Link key={action.label} to={action.path}>
-                <Card className="group h-auto border-primary/20 bg-gradient-to-br from-primary/5 via-sky-light/10 to-primary/5 transition-all hover:border-primary/50 hover:shadow-md hover:bg-gradient-to-br hover:from-primary/10 hover:via-sky-light/20 hover:to-primary/10">
-                  <CardContent className="flex flex-col gap-1 p-5">
-                    <span className="font-semibold text-foreground text-sm flex items-center gap-1 group-hover:text-primary transition-colors">
+                <Card className="group h-auto border border-primary/20 bg-gradient-to-br from-primary/5 via-sky-light/10 to-primary/5 transition-all hover:border-primary/50 hover:shadow-md hover:bg-gradient-to-br hover:from-primary/10 hover:via-sky-light/20 hover:to-primary/10">
+                  <CardContent className="flex flex-col gap-1 p-4 text-center">
+                    <span className="font-semibold text-foreground text-sm flex items-center justify-center gap-1 group-hover:text-primary transition-colors">
                       {action.label === "Live" && (
                         <span
                           className="inline-block animate-pulse text-[1.25em]"
