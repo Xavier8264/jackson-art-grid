@@ -25,7 +25,7 @@ Key pattern: Events filter by date ranges (today/thisWeek/thisWeekend/thisMonth)
 
 ### Routing & Pages
 
-Defined in [App.tsx](src/App.tsx#L1-L45):
+Defined in [App.tsx](../src/App.tsx):
 - `/` – Home with featured content and quick action cards
 - `/calendar` – Event browsing with date/category filters
 - `/map` – Mapbox-based venue exploration
@@ -54,21 +54,21 @@ Use `@/` for src-relative imports:
 - Configured in vite.config.ts and tsconfig.json
 
 ### Supabase Integration
-- Client initialized in [integrations/supabase/client.ts](src/integrations/supabase/client.ts)
-- Types auto-generated in [integrations/supabase/types.ts](src/integrations/supabase/types.ts) — **do not edit manually**
+- Client initialized in [integrations/supabase/client.ts](../src/integrations/supabase/client.ts)
+- Types auto-generated in [integrations/supabase/types.ts](../src/integrations/supabase/types.ts) — **do not edit manually**
 - Uses localStorage for session persistence, auto-refresh enabled
 - Access: `import { supabase } from "@/integrations/supabase/client"`
 
 ## Component Architecture
 
 ### Layout Structure
-[Layout.tsx](src/components/layout/Layout.tsx) wraps all pages with:
+[Layout.tsx](../src/components/layout/Layout.tsx) wraps all pages with:
 - Sticky header (Header.tsx with navigation)
 - Flex layout (min-h-screen) ensuring footer sticks to bottom
 - Toaster (shadcn toast) + Sonner (sonner.dev toast) providers
 
 ### shadcn-ui Pattern
-- Components in [components/ui/](src/components/ui/) are pre-built exports from shadcn-ui CLI
+- Components in [components/ui/](../src/components/ui/) are pre-built exports from shadcn-ui CLI
 - **Do not hand-edit ui/ components** — regenerate via `npx shadcn-ui@latest add <component>`
 - Use provided props for styling (className, variants)
 - Example: Button with variants - `<Button variant="outline">Click</Button>`
@@ -89,9 +89,9 @@ const { data: items, isLoading } = useQuery({
 ```
 
 ### Custom Hooks
-- [useEventFilters](src/hooks/useEventFilters.ts): Filters events by date ranges (today/thisWeek/thisWeekend/thisMonth) and categories using date-fns
-- [use-toast](src/hooks/use-toast.ts): shadcn toast hook
-- [use-mobile](src/hooks/use-mobile.tsx): Media query helper for responsive design
+- [useEventFilters](../src/hooks/useEventFilters.ts): Filters events by date ranges (today/thisWeek/thisWeekend/thisMonth) and categories using date-fns
+- [use-toast](../src/hooks/use-toast.ts): shadcn toast hook
+- [use-mobile](../src/hooks/use-mobile.tsx): Media query helper for responsive design
 
 ## Code Style & Conventions
 
@@ -115,8 +115,8 @@ const { data: items, isLoading } = useQuery({
 ## Common Tasks
 
 ### Adding a New Page
-1. Create in [pages/](src/pages/) as `MyPage.tsx`
-2. Add route in [App.tsx](src/App.tsx) before the catch-all `*` route
+1. Create in [pages/](../src/pages/) as `MyPage.tsx`
+2. Add route in [App.tsx](../src/App.tsx) before the catch-all `*` route
 3. Use Layout wrapper (handled automatically via `<Layout>` in App)
 4. Fetch data with useQuery from Supabase
 
@@ -127,7 +127,7 @@ npx shadcn-ui@latest add button  # Downloads component to ui/
 Then import: `import { Button } from "@/components/ui/button"`
 
 ### Filtering Events
-Use `useEventFilters` hook from [useEventFilters.ts](src/hooks/useEventFilters.ts):
+Use `useEventFilters` hook from [useEventFilters.ts](../src/hooks/useEventFilters.ts):
 ```tsx
 const filtered = useEventFilters(events, { dateRange: "thisWeek", artType: "painting" });
 ```
