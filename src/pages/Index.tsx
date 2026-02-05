@@ -137,7 +137,10 @@ export default function Index() {
                   >
                     <section.icon className="h-6 w-6" />
                   </div>
-                  <h2 className="mb-1 font-semibold">{section.title}</h2>
+                  <h2 className="mb-1 font-semibold flex items-center gap-1.5">
+                    {section.title === "Live" && <span className="inline-block animate-pulse text-primary text-base">·</span>}
+                    {section.title}
+                  </h2>
                   <p className="text-sm text-muted-foreground">
                     {section.description}
                   </p>
