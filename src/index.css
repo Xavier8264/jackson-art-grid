@@ -14,7 +14,7 @@
 @layer base {
   :root {
     /* Sky blue primary palette */
-    --primary: 243 75% 58%;
+    --primary: 207 70% 22%;
     --primary-foreground: 225 100% 96%;
 
     /* Backgrounds - clean whites */
@@ -36,7 +36,7 @@
     --muted-foreground: 0 0% 9%;
 
     /* Accent - deeper sky blue */
-    --accent: 250 100% 97%;
+    --accent: 207 70% 22%;
     --accent-foreground: 258 89% 66%;
 
     --destructive: 0 72% 50%;
@@ -45,19 +45,19 @@
     /* Borders and inputs */
     --border: 0 0% 83%;
     --input: 0 0% 83%;
-    --ring: 243 75% 58%;
+    --ring: 207 70% 22%;
 
     --radius: 1.25rem;
 
     /* Sidebar */
     --sidebar-background: 200 30% 98%;
     --sidebar-foreground: 0 0% 9%;
-    --sidebar-primary: 243 75% 58%;
+    --sidebar-primary: 207 70% 22%;
     --sidebar-primary-foreground: 225 100% 96%;
     --sidebar-accent: 0 0% 32%;
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 0 0% 83%;
-    --sidebar-ring: 243 75% 58%;
+    --sidebar-ring: 207 70% 22%;
 
     /* Custom tokens for Hub */
     --sky: 200 80% 55%;
@@ -85,7 +85,7 @@
   }
 
   .dark {
-    --primary: 234 89% 73%;
+    --primary: 207 70% 22%;
     --primary-foreground: 243 47% 20%;
 
     --background: 0 0% 9%;
@@ -103,7 +103,7 @@
     --muted: 0 0% 45%;
     --muted-foreground: 0 0% 98%;
 
-    --accent: 261 72% 22%;
+    --accent: 207 70% 22%;
     --accent-foreground: 255 91% 76%;
 
     --destructive: 0 84% 60%;
@@ -111,16 +111,16 @@
 
     --border: 0 0% 32%;
     --input: 0 0% 32%;
-    --ring: 234 89% 73%;
+    --ring: 207 70% 22%;
 
     --sidebar-background: 220 25% 8%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 234 89% 73%;
+    --sidebar-primary: 207 70% 22%;
     --sidebar-primary-foreground: 243 47% 20%;
     --sidebar-accent: 255 91% 76%;
     --sidebar-accent-foreground: 261 72% 22%;
     --sidebar-border: 0 0% 32%;
-    --sidebar-ring: 234 89% 73%;
+    --sidebar-ring: 207 70% 22%;
 
     --sky: 200 70% 50%;
     --sky-light: 200 50% 20%;
