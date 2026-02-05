@@ -108,7 +108,7 @@ export default function Index() {
               <Button
                 key={action.label}
                 variant="outline"
-                className="h-auto flex-col gap-0.5 border border-primary/30 rounded-lg bg-sky-light/20 px-6 py-4 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+                className="h-auto flex-col gap-0.5 border-primary/20 px-6 py-3 hover:border-primary hover:bg-primary hover:text-primary-foreground"
                 asChild
               >
                 <Link to={action.path}>
